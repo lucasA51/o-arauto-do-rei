@@ -1,0 +1,49 @@
+.text-justify {
+          text-align: justify;
+        }
+
+.background-image {
+        border-block: solid;
+        border-block-color: #ebac2f;
+        writing-mode: horizontal-tb;
+        background-color: #0e0f13;
+        background-image: url('../images/logo.jpg');
+        background-size: contain; 
+        background-position: right; 
+        background-repeat: no-repeat; 
+        height: 50%; 
+        width: 100%; 
+        }
+      
+.footer-style {
+        border-block: solid; 
+        border-block-color: #ebac2f;
+        background-color: #343434;
+        writing-mode: horizontal-tb;
+      }
+
+.custom-text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-height: 5em; /* Ajuste conforme necessário */
+      cursor: pointer;
+    }
+
+.custom-text.show {
+      white-space: normal;
+      max-height: none;
+    }
+
+@font-face {
+    font-family: 'got-font';
+    src: url('../fonts/got-font.ttf') format('truetype');
+}
+
+.title {
+    text-align: center;
+    font-family: 'got-font', sans-serif;
+    color: white;
+    font-size:3em;
+    font-weight: 100;
+}

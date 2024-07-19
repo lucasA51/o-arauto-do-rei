@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-bs-theme="dark"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>O Arauto do Rei</title>
+
+    <link rel="stylesheet" th:href="@{/stylesheets/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/stylesheets/style.css}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" th:href="@{/}">O Arauto</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/noticias-do-reino}">Notícias do Reino</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/economia-e-comercio}">Economia e Comércio</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/vida-na-corte}">Vida na Corte</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/cronicas-e-opinioes}">Crônicas e Opiniões</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/arte-e-cultura}">Arte e Cultura</a>
+            </li>
+        </ul>
+    </div>
+</nav> <!-- Navigation bar -->
+
+
+<div class="jumbotron text-center background-image">
+    <h1 class="title mt-4">O Arauto do Rei</h1>
+    <p>A Voz Inquestionável dos Sete Reinos</p>
+</div> <!-- Central title -->
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Ultimas Notícias</h2>
+
+            <div class="card mb-3"> <!-- news1 -->
+                <img class="card-img-top" th:src="@{/images/news1-image.png}" alt="notícia 1">
+                <div class="card-body">
+                    <h5 class="card-title">Tragédia no Casamento Real: A Morte do Príncipe Joffrey Baratheon</h5>
+                    <p class="card-text custom-text text-justify" id="news1-text">
+                        Porto Real foi palco de uma chocante tragédia durante o luxuoso banquete de casamento do
+                        Príncipe Joffrey Baratheon e Margaery Tyrell. O jovem monarca, conhecido por seu temperamento
+                        tirânico, faleceu de forma abrupta e dolorosa após beber vinho envenenado. Testemunhas descrevem
+                        cenas caóticas enquanto Joffrey sufocava e agonizava diante dos olhos atônitos dos convidados. A
+                        morte do príncipe gerou uma onda de pânico e especulações sobre a identidade do responsável pelo
+                        regicídio. As investigações estão em curso, e o reino está em alvoroço, com muitas perguntas sem
+                        resposta e um futuro incerto para a coroa dos Sete Reinos.
+                    </p>
+                    <a href="#" class="btn btn-primary">Leia Mais</a>
+                </div>
+            </div>
+
+            <script>
+                document.getElementById('news1-text').addEventListener('click', function () {
+                    this.classList.toggle('show');
+                });
+            </script>
+
+            <div class="card mb-3">
+                <img class="card-img-top" th:src="@{/images/news2-image.png}" alt="notícia 2">
+                <div class="card-body">
+                    <h5 class="card-title">A Ascensão de Jon Snow: O Novo Lorde Comandante da Patrulha da Noite</h5>
+                    <p class="card-text custom-text text-justify" id="news2-text">
+                        Em um momento crucial para a Patrulha da Noite, Jon Snow foi eleito como o novo Lorde
+                        Comandante. Enfrentando o desafio de unir a Patrulha em meio a crescentes ameaças dos Selvagens
+                        e das criaturas além da Muralha, Jon demonstrou sua capacidade de liderança e sua habilidade em
+                        navegar as complexas políticas da Patrulha. Sua eleição foi resultado de uma votação
+                        surpreendentemente disputada, onde seu senso de justiça e coragem conquistou o apoio decisivo de
+                        seus irmãos de preto. Como o 998º Lorde Comandante, Jon Snow enfrenta agora a difícil tarefa de
+                        preparar a Patrulha da Noite para os perigos iminentes que se aproximam do Norte.
+                    </p>
+                    <a href="#" class="btn btn-primary">Leia mais</a>
+                </div>
+            </div>
+
+            <script>
+                document.getElementById('news2-text').addEventListener('click', function () {
+                    this.classList.toggle('show');
+                });
+            </script>
+
+            <div class="card mb-3">
+                <img class="card-img-top" th:src="@{/images/news3-image.png}" alt="notícia 3">
+                <div class="card-body">
+                    <h5 class="card-title">O Julgamento por Combate: Tyrion Lannister e o Viper contra a Montanha</h5>
+                    <p class="card-text custom-text text-justify" id="news3-text">
+                        Porto Real foi palco de um evento dramático e de grande expectativa: o julgamento por combate de
+                        Tyrion Lannister. Acusado injustamente de envenenar o Rei Joffrey, Tyrion escolheu o julgamento
+                        por combate para provar sua inocência. Seu campeão, Oberyn Martell, conhecido como a Víbora
+                        Vermelha de Dorne, enfrentou o imponente Gregor Clegane, a Montanha, escolhido pelos Lannisters.
+                        O combate foi intenso e brutal, com Oberyn demonstrando habilidades excepcionais e quase
+                        vencendo a Montanha. No entanto, em um momento de descuido, Oberyn foi mortalmente ferido por
+                        Gregor Clegane, selando o destino de Tyrion. Esta derrota não apenas marcou a condenação de
+                        Tyrion, mas também acirrou ainda mais as tensões entre Dorne e a coroa, deixando o reino em um
+                        estado de turbulência e incerteza.
+                    </p>
+                    <a href="#" class="btn btn-primary">Leia mais</a>
+                </div>
+            </div>
+
+            <script>
+                document.getElementById('news3-text').addEventListener('click', function () {
+                    this.classList.toggle('show');
+                });
+            </script>
+
+        </div> <!-- Latest news -->
+
+        <div class="col-md-4">
+            <div class="row text-justify mb-3">
+                <h2>Notícias Populares</h2>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="#">A Conquista de Yunkai: Daenerys Targaryen Libertadora</a>
+                    </li>
+                    <li class="list-group-item"><a href="#">Massacre no Casamento Vermelho: O Trágico Fim dos Stark</a>
+                    </li>
+                    <li class="list-group-item"><a href="#">A Morte de Lorde Tywin Lannister: Um Golpe na Fortaleza de
+                        Casterly Rock</a></li>
+                </ul>
+            </div> <!-- Popular news -->
+
+            <div class="row text-justify mb-3">
+                <div class="card">
+                    <div class="card-body text-justify">
+                        <h5 class="card-title">Bem-vindo ao O Arauto do Rei</h5>
+                        <p class="card-text">
+                            O jornal mais confiável e respeitado dos Sete Reinos, sediado no coração de Porto Real.
+                            Fundado há mais de um século, nosso compromisso é trazer as notícias mais recentes, análises
+                            aprofundadas e informações imparciais para todos os cidadãos, desde a Fortaleza Vermelha até
+                            as ruas de Baixada das Pulgas.
+                        </p>
+                        <h6 class="card-subtitle mb-2 text-muted">Nossa Missão</h6>
+                        <p class="card-text">
+                            Nossa missão é informar, educar e conectar os habitantes dos Sete Reinos com as notícias que
+                            importam. Com uma equipe dedicada de jornalistas experientes, correspondentes em todos os
+                            cantos do reino e uma rede de informantes que nos mantém atualizados com os acontecimentos
+                            mais recentes, garantimos que nossos leitores recebam uma cobertura abrangente e precisa.
+                        </p>
+                        <h6 class="card-subtitle mb-2 text-muted">Assine O Arauto do Rei</h6>
+                        <p class="card-text">
+                            Receba nossas edições diretamente em sua residência. Oferecemos assinaturas mensais e
+                            anuais, com entrega garantida por nossos mensageiros mais rápidos. Para mais informações,
+                            visite nosso site ou entre em contato diretamente com nossa equipe de assinaturas.
+                        </p>
+                        <h6 class="card-subtitle mb-2 text-muted">Junte-se à Nossa Equipe</h6>
+                        <p class="card-text">
+                            Estamos sempre em busca de talentos apaixonados por jornalismo. Se você deseja fazer parte
+                            de nossa equipe e contribuir para a disseminação da verdade em todo o reino, envie seu
+                            currículo e uma amostra de seu trabalho para carreiras@oarautodorei.westeros.
+                        </p>
+                        <h6 class="card-subtitle mb-2 text-muted">Conecte-se Conosco</h6>
+                        <p class="card-text">
+                            Siga-nos em nossas plataformas sociais para atualizações em tempo real:<br>
+                            Facebook: OArautodoRei<br>
+                            Twitter: @ArautodoReiWOS<br>
+                            Instagram: @arautodorei
+                        </p>
+                        <p class="card-text">No O Arauto do Rei, acreditamos que a informação é a chave para um reino
+                            mais justo e informado. Agradecemos sua confiança e esperamos continuar a servir como sua
+                            fonte principal de notícias e informações.</p>
+                    </div>
+                </div>
+
+            </div> <!-- About us card -->
+        </div>
+    </div>
+    <div class="col"></div>
+</div>
+</div> <!-- News cards -->
+
+<footer class="text-center text-lg-start footer-style">
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align: left;">
+                <h5 class="text-uppercase">Sobre nós</h5>
+                <p style="margin-bottom: 2px;"><strong>Endereço:</strong> Rua da Fé, 23, Porto Real</p>
+                <p style="margin-bottom: 2px;"><strong>Telefone:</strong> (123) 456-7890</p>
+                <p style="margin-bottom: 0;"><strong>E-mail:</strong> contato@oarautodorei.westeros</p>
+                <p style="margin-bottom: 2px;"><strong>Corvo Mensageiro:</strong> Envie suas mensagens para nosso mestre
+                    de corvos na Torre do Sino.</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="text-align: left;">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="#!">Facebook</a></li>
+                    <li><a href="#!">Twitter</a></li>
+                    <li><a href="#!">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> <!-- contact information -->
+</footer>
+<div class="text-center p-3">
+    &copy; 300 AL O Arauto do Rei
+</div> <!-- copyright information-->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/js/scripts.js"></script>
+
+</body>
+
+</html>
