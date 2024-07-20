@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/arautodorei?useSSL=false&createDatabaseIfNotExist=true
+    username: root
+    password: "12345"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none  # Ensures no tables are created automatically
+    show-sql: true
+  logging:
+    level:
+      org.hibernate.SQL: debug  # Logs SQL statements for debugging
+  jmx:
+    enabled: true
+  application:
+    admin:
+      enabled: true

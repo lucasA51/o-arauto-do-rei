@@ -1,13 +1,22 @@
 package com.santosltda.oarautodorei.controller;
 
+import com.santosltda.oarautodorei.domain.BannerHome;
+import com.santosltda.oarautodorei.service.BannerHomeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class NavigationController {
 
+    @Autowired
+    private BannerHomeService bannerHomeService;
+
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        BannerHome bannerHome = bannerHomeService.getBannerHome(); // Fetch banner data
+        model.addAttribute("bannerHome", bannerHome); // Add banner data to the model
         return "index";
     }
 
