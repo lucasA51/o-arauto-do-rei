@@ -15,12 +15,12 @@ public class BannerHome {
 
     @NotBlank
     @Size(min = 2, max = 255)
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String titulo;
 
     @NotBlank
     @Size(min = 2, max = 255)
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String subtitulo;
 
     @NotBlank
