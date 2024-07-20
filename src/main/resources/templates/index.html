@@ -58,56 +58,12 @@
         <div class="col-md-8">
             <h2>Ultimas Notícias</h2>
 
-            <div class="card mb-3"> <!-- news1 -->
-                <img class="card-img-top" th:src="@{/images/news1-image.png}" alt="notícia 1">
+            <div th:each="noticia : ${noticias}" class="card mb-3">
+                <img class="card-img-top" th:src="@{${noticia.imagemURL}}" alt="notícia">
                 <div class="card-body">
-                    <h5 class="card-title">Tragédia no Casamento Real: A Morte do Príncipe Joffrey Baratheon</h5>
-                    <p class="card-text custom-text text-justify" id="news1-text">
-                        Porto Real foi palco de uma chocante tragédia durante o luxuoso banquete de casamento do
-                        Príncipe Joffrey Baratheon e Margaery Tyrell. O jovem monarca, conhecido por seu temperamento
-                        tirânico, faleceu de forma abrupta e dolorosa após beber vinho envenenado. Testemunhas descrevem
-                        cenas caóticas enquanto Joffrey sufocava e agonizava diante dos olhos atônitos dos convidados. A
-                        morte do príncipe gerou uma onda de pânico e especulações sobre a identidade do responsável pelo
-                        regicídio. As investigações estão em curso, e o reino está em alvoroço, com muitas perguntas sem
-                        resposta e um futuro incerto para a coroa dos Sete Reinos.
-                    </p>
+                    <h5 class="card-title" th:text="${noticia.titulo}">Título da Notícia</h5>
+                    <p class="card-text custom-text text-justify" th:text="${noticia.descricao}">Descrição da Notícia</p>
                     <a href="#" class="btn btn-primary">Leia Mais</a>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <img class="card-img-top" th:src="@{/images/news2-image.png}" alt="notícia 2">
-                <div class="card-body">
-                    <h5 class="card-title">A Ascensão de Jon Snow: O Novo Lorde Comandante da Patrulha da Noite</h5>
-                    <p class="card-text custom-text text-justify" id="news2-text">
-                        Em um momento crucial para a Patrulha da Noite, Jon Snow foi eleito como o novo Lorde
-                        Comandante. Enfrentando o desafio de unir a Patrulha em meio a crescentes ameaças dos Selvagens
-                        e das criaturas além da Muralha, Jon demonstrou sua capacidade de liderança e sua habilidade em
-                        navegar as complexas políticas da Patrulha. Sua eleição foi resultado de uma votação
-                        surpreendentemente disputada, onde seu senso de justiça e coragem conquistou o apoio decisivo de
-                        seus irmãos de preto. Como o 998º Lorde Comandante, Jon Snow enfrenta agora a difícil tarefa de
-                        preparar a Patrulha da Noite para os perigos iminentes que se aproximam do Norte.
-                    </p>
-                    <a href="#" class="btn btn-primary">Leia mais</a>
-                </div>
-            </div>
-
-            <div class="card mb-3">
-                <img class="card-img-top" th:src="@{/images/news3-image.png}" alt="notícia 3">
-                <div class="card-body">
-                    <h5 class="card-title">O Julgamento por Combate: Tyrion Lannister e o Viper contra a Montanha</h5>
-                    <p class="card-text custom-text text-justify" id="news3-text">
-                        Porto Real foi palco de um evento dramático e de grande expectativa: o julgamento por combate de
-                        Tyrion Lannister. Acusado injustamente de envenenar o Rei Joffrey, Tyrion escolheu o julgamento
-                        por combate para provar sua inocência. Seu campeão, Oberyn Martell, conhecido como a Víbora
-                        Vermelha de Dorne, enfrentou o imponente Gregor Clegane, a Montanha, escolhido pelos Lannisters.
-                        O combate foi intenso e brutal, com Oberyn demonstrando habilidades excepcionais e quase
-                        vencendo a Montanha. No entanto, em um momento de descuido, Oberyn foi mortalmente ferido por
-                        Gregor Clegane, selando o destino de Tyrion. Esta derrota não apenas marcou a condenação de
-                        Tyrion, mas também acirrou ainda mais as tensões entre Dorne e a coroa, deixando o reino em um
-                        estado de turbulência e incerteza.
-                    </p>
-                    <a href="#" class="btn btn-primary">Leia mais</a>
                 </div>
             </div>
 
