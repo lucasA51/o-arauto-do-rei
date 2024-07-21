@@ -1,6 +1,5 @@
 package com.santosltda.oarautodorei.repository;
 
-
 import com.santosltda.oarautodorei.domain.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 

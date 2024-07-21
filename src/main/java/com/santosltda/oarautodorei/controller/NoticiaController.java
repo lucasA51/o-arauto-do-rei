@@ -62,7 +62,7 @@ public class NoticiaController {
     public String showEditForm(@PathVariable("id") Long id, Model model) {
         NoticiaHome noticia = noticiaHomeService.findById(id);
         model.addAttribute("noticia", noticia);
-        return "editar-noticia";
+        return "noticias/editar";
     }
 
     @PostMapping("noticias/atualizar")
