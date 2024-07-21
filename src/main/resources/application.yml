@@ -6,11 +6,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: none  # Ensures no tables are created automatically
+      ddl-auto: none
     show-sql: true
   logging:
     level:
-      org.hibernate.SQL: debug  # Logs SQL statements for debugging
+      org.hibernate.SQL: debug
   jmx:
     enabled: true
   application:

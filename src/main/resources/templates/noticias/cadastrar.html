@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark"
+      lang="pt-br"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Cadastrar Notícia - O Arauto do Rei</title>
+    <link rel="stylesheet" th:href="@{/stylesheets/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/stylesheets/style.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" th:href="@{/}">O Arauto</a>
+    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+            data-target="#navbarNav" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!--<li class="nav-item">
+                <a class="nav-link" th:href="@{/templates/noticias-do-reino}">Notícias do Reino</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/templates/economia-e-comercio}">Economia e Comércio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/templates/vida-na-corte}">Vida na Corte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/templates/cronicas-e-opinioes}">Crônicas e Opiniões</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/templates/arte-e-cultura}">Arte e Cultura</a>
+            </li>-->
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2>Cadastrar Nova Notícia</h2>
+            <form method="post" th:action="@{/noticias/cadastrar}" th:object="${noticia}">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input class="form-control" id="titulo" name="titulo" required th:field="*{titulo}" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <textarea class="form-control" id="descricao" name="descricao" required rows="5"
+                              th:field="*{descricao}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="imagemURL">URL da Imagem</label>
+                    <input class="form-control" id="imagemURL" name="imagemURL" required th:field="*{imagemURL}"
+                           type="text">
+                </div>
+                <button class="btn btn-primary" type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer class="text-center text-lg-start footer-style">
+    <div class="container p-4">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align: left;">
+                <h5 class="text-uppercase">Sobre nós</h5>
+                <p style="margin-bottom: 2px;"><strong>Endereço:</strong> Rua da Fé, 23, Porto Real</p>
+                <p style="margin-bottom: 2px;"><strong>Telefone:</strong> (123) 456-7890</p>
+                <p style="margin-bottom: 0;"><strong>E-mail:</strong> contato@oarautodorei.westeros</p>
+                <p style="margin-bottom: 2px;"><strong>Corvo Mensageiro:</strong> Envie suas mensagens para nosso mestre
+                    de corvos na Torre do Sino.</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="text-align: left;">
+                <h5 class="text-uppercase">Links</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a th:href="@{/}">Facebook</a></li>
+                    <li><a th:href="@{/}">Twitter</a></li>
+                    <li><a th:href="@{/}">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="text-center p-3">
+    &copy; 300 AL O Arauto do Rei
+</div>
+
+<script src="/scripts/jquery-3.5.1.slim.min.js"></script>
+<script src="/scripts/popper.min.js"></script>
+<script src="/scripts/bootstrap.bundle.min.js"></script>
+<script src="/scripts/script.js"></script>
+</body>
+</html>

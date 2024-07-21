@@ -16,4 +16,16 @@ public class NoticiaHomeService {
     public List<NoticiaHome> getAllNoticias() {
         return noticiaHomeRepository.findAll();
     }
+
+    public void saveNoticia(NoticiaHome noticia) {
+        noticiaHomeRepository.save(noticia);
+    }
+
+    public NoticiaHome findById(Long id) {
+        return noticiaHomeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Notícia inválida ID:" + id));
+    }
+
+    public void updateNoticia(NoticiaHome noticia) {
+        noticiaHomeRepository.save(noticia);
+    }
 }
