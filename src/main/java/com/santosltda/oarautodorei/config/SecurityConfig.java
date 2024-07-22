@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,21 +23,22 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/","/usuarios/login", "/stylesheets/**","/scripts/**","/images/**","/fonts/**","/static/**").permitAll()
-                                .requestMatchers("/login", "/usuarios/registrar").permitAll()
-                                .requestMatchers("/noticias/**").authenticated()
+                                .requestMatchers("/", "/usuarios/login", "/stylesheets/**", "/scripts/**", "/images/**", "/fonts/**", "/static/**").permitAll()
+                                .requestMatchers("/login", "/usuarios/registrar").permitAll() // Permit access to registration page
+                                .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/usuarios/login")
-                                .loginProcessingUrl("/login")
+                                .loginProcessingUrl("/usuarios/login") // Ensure this matches the form action URL
                                 .defaultSuccessUrl("/noticias/listar", true)
                                 .failureUrl("/usuarios/login?error=true")
                                 .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll);
+                .logout(logout -> logout.permitAll());
         return http.build();
     }
 

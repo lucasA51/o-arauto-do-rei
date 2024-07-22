@@ -23,7 +23,7 @@
 <div class="container mt-5">
     <h2>Login</h2>
 
-    <form action="/login" method="post">
+    <form action="/usuarios/login" method="post">
         <div class="form-group">
             <label for="usuario">Nome de Usuário</label>
             <input type="text" class="form-control" id="usuario" name="username" placeholder="Digite seu nome de usuário" required>
@@ -35,7 +35,7 @@
 
         <!-- Mensagens de erro -->
         <div th:if="${param.error}" class="alert alert-danger mt-3">
-            <span th:text="${param.error}">Erro de login</span>
+            <span th:text="'Nome de usuário ou senha incorretos.'">Erro de login</span>
         </div>
 
         <!-- Mensagens de sucesso -->
@@ -47,6 +47,10 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
     </form>
+</div>
+
+<div class="text-center mt-4">
+    <a th:href="@{/usuarios/registrar}" class="btn btn-primary">Registrar</a>
 </div>
 
 <script src="/scripts/jquery-3.5.1.slim.min.js"></script>
