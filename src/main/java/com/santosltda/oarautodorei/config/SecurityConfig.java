@@ -27,18 +27,23 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/", "/usuarios/registrar", "/usuarios/login", "/stylesheets/**", "/scripts/**", "/images/**", "/fonts/**", "/static/**").permitAll()
-                                .requestMatchers("/login").permitAll()
                                 .requestMatchers("/noticias/**").authenticated()
+                                .anyRequest().permitAll()
                 )
                 .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/usuarios/login")
-                                .loginProcessingUrl("/usuarios/login") // Ensure this matches the form action URL
+                                .loginProcessingUrl("/usuarios/login")
                                 .defaultSuccessUrl("/noticias/listar", true)
                                 .failureUrl("/usuarios/login?error=true")
                                 .permitAll()
                 )
-                .logout(logout -> logout.permitAll());
+                .logout(logout ->
+                        logout
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/usuarios/login?logout=true")
+                                .permitAll()
+                );
         return http.build();
     }
 
