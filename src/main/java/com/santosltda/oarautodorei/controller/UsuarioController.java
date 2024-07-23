@@ -4,6 +4,7 @@ import com.santosltda.oarautodorei.domain.Usuario;
 import com.santosltda.oarautodorei.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,13 @@ public class UsuarioController {
     @GetMapping("/usuarios/login")
     public String showLoginForm() {
         return "usuarios/login";
+    }
+
+    @GetMapping("/usuarios/registrar")
+    public String showRegisterForm(Model model, @RequestParam(value = "erro", required = false) String erro, @RequestParam(value = "sucesso", required = false) String sucesso) {
+        model.addAttribute("erro", erro);
+        model.addAttribute("sucesso", sucesso);
+        return "usuarios/registrar"; // Retorna o template para a página de registro
     }
 
     @PostMapping("/usuarios/registrar")

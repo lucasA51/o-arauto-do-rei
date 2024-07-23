@@ -15,12 +15,12 @@ public class Usuario {
 
     @NotBlank
 
-    @Size(min = 2, max = 50)
+    @Size(min = 1, max = 255)
     @Column(nullable = false, unique = true)
     private String usuario;
 
     @NotBlank
-    @Size(min = 2, max = 50)
+    @Size(min = 1, max = 255)
     @Column(nullable = false)
     private String senha;
 }

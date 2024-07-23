@@ -26,9 +26,9 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/", "/usuarios/login", "/stylesheets/**", "/scripts/**", "/images/**", "/fonts/**", "/static/**").permitAll()
-                                .requestMatchers("/login", "/usuarios/registrar").permitAll() // Permit access to registration page
-                                .anyRequest().authenticated()
+                                .requestMatchers("/", "/usuarios/registrar", "/usuarios/login", "/stylesheets/**", "/scripts/**", "/images/**", "/fonts/**", "/static/**").permitAll()
+                                .requestMatchers("/login").permitAll()
+                                .requestMatchers("/noticias/**").authenticated()
                 )
                 .formLogin(formLogin ->
                         formLogin

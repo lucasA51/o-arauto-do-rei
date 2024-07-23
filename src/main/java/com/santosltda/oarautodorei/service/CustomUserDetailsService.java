@@ -22,10 +22,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         Usuario usuario = usuarioRepository.findByUsuario(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + username));
 
-        // Construir o UserDetails com base no usuário encontrado
         return User.withUsername(usuario.getUsuario())
                 .password(usuario.getSenha())
-                .authorities("USER") // Ajuste conforme necessário
+                .authorities("USER")
                 .build();
     }
 }
