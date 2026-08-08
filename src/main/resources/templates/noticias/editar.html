@@ -1,57 +1,65 @@
 <!DOCTYPE html>
-<html data-bs-theme="dark" lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Notícia</title>
-    <link rel="stylesheet" th:href="@{/stylesheets/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/stylesheets/style.css}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Editar Decreto · O Arauto do Rei')}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" th:href="@{/}">O Arauto</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <!--<li class="nav-item"><a class="nav-link" th:href="@{/noticias-do-reino}">Notícias do Reino</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/economia-e-comercio}">Economia e Comércio</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/vida-na-corte}">Vida na Corte</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/cronicas-e-opinioes}">Crônicas e Opiniões</a></li>
-            <li class="nav-item"><a class="nav-link" th:href="@{/arte-e-cultura}">Arte e Cultura</a></li>-->
-        </ul>
-    </div>
-</nav>
+<div th:replace="~{fragments/layout :: raven-banner}"></div>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
 
-<div class="container mt-5">
-    <h2>Editar Notícia</h2>
-    <form th:action="@{/noticias/atualizar}" th:object="${noticia}" method="post">
-        <div class="form-group">
-            <label for="titulo">Título</label>
-            <input type="text" id="titulo" name="titulo" class="form-control" th:field="*{titulo}" required>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card card-medieval p-4">
+                <h2 class="font-cinzel text-gold mb-4 border-bottom border-gold pb-2">✏️ Revisar Decreto Imperial nº <span th:text="${noticia.id}">ID</span></h2>
+
+                <form method="post" th:action="@{/noticias/editar/{id}(id=${noticia.id})}" th:object="${noticia}">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label font-cinzel text-gold">Título do Decreto</label>
+                        <input type="text" class="form-control input-medieval" id="titulo" th:field="*{titulo}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descricao" class="form-label font-cinzel text-gold">Resumo / Lead</label>
+                        <textarea class="form-control input-medieval" id="descricao" th:field="*{descricao}" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="conteudoCompleto" class="form-label font-cinzel text-gold">Corpo Completo da Crônica</label>
+                        <textarea class="form-control input-medieval" id="conteudoCompleto" th:field="*{conteudoCompleto}" rows="7"></textarea>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-4">
+                            <label for="casaNobre" class="form-label font-cinzel text-gold">Casa Nobre</label>
+                            <input type="text" class="form-control input-medieval" id="casaNobre" th:field="*{casaNobre}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="regiao" class="form-label font-cinzel text-gold">Região</label>
+                            <input type="text" class="form-control input-medieval" id="regiao" th:field="*{regiao}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="autor" class="form-label font-cinzel text-gold">Autor / Escriba</label>
+                            <input type="text" class="form-control input-medieval" id="autor" th:field="*{autor}">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="imagemURL" class="form-label font-cinzel text-gold">Caminho da Imagem</label>
+                        <input type="text" class="form-control input-medieval" id="imagemURL" th:field="*{imagemURL}" required>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a th:href="@{/noticias/listar}" class="btn btn-outline-gold font-cinzel">Cancelar</a>
+                        <button type="submit" class="btn btn-gold font-cinzel">Salvar Alterações no Pergaminho</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="descricao">Descrição</label>
-            <textarea id="descricao" name="descricao" class="form-control" th:field="*{descricao}" rows="5" required></textarea>
-        </div>
-        <div class="form-group">
-            <label for="imagemURL">Link para Imagem</label>
-            <textarea id="imagemURL" name="imagemURL" class="form-control" th:field="*{imagemURL}" rows="5" required></textarea>
-        </div>
-        <div class="form-group">
-            <input type="hidden" name="id" th:field="*{id}">
-        </div>
-        <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <a th:href="@{/noticias/listar}" class="btn btn-secondary ml-2">Cancelar</a>
-        </div>
-    </form>
+    </div>
 </div>
 
-<script src="/scripts/jquery-3.5.1.slim.min.js"></script>
-<script src="/scripts/popper.min.js"></script>
-<script src="/scripts/bootstrap.bundle.min.js"></script>
-<script src="/scripts/script.js"></script>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/script.js}"></script>
 </body>
 </html>

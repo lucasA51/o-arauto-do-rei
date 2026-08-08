@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Mapa & Arquivos de Westeros · O Arauto do Rei')}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: raven-banner}"></div>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="font-cinzel text-gold display-4">🗺️ Cartografia & Arquivos Reais</h1>
+        <p class="font-garamond text-parchment-light fs-5">Examine os éditos regionais mapeados pelos cartógrafos da Cidadela</p>
+        <hr class="border-gold w-25 mx-auto">
+    </div>
+
+    <!-- Regional Nodes Selector -->
+    <div class="row g-3 mb-5 text-center">
+        <div class="col-6 col-md-3">
+            <a th:href="@{/arquivos/mapa?regiao=Porto Real}" class="btn btn-outline-gold w-100 p-3 font-cinzel map-node">
+                <span class="fs-2 d-block">👑</span>
+                <strong>Porto Real</strong>
+                <small class="text-muted d-block">Terras da Coroa</small>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/arquivos/mapa?regiao=O Norte}" class="btn btn-outline-gold w-100 p-3 font-cinzel map-node">
+                <span class="fs-2 d-block">🏰</span>
+                <strong>O Norte</strong>
+                <small class="text-muted d-block">Winterfell & Muralha</small>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/arquivos/mapa?regiao=Ilhas de Ferro}" class="btn btn-outline-gold w-100 p-3 font-cinzel map-node">
+                <span class="fs-2 d-block">⚓</span>
+                <strong>Ilhas de Ferro</strong>
+                <small class="text-muted d-block">Pyke & Mar Poente</small>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/arquivos/mapa?regiao=Essos}" class="btn btn-outline-gold w-100 p-3 font-cinzel map-node">
+                <span class="fs-2 d-block">🐪</span>
+                <strong>Essos</strong>
+                <small class="text-muted d-block">Baía dos Escravos</small>
+            </a>
+        </div>
+    </div>
+
+    <!-- Filter Status -->
+    <div th:if="${regiaoSelecionada != null}" class="alert alert-dark border-gold text-gold font-cinzel mb-4">
+        📍 Exibindo decretos da região de: <strong th:text="${regiaoSelecionada}">Região</strong>
+        <a th:href="@{/arquivos/mapa}" class="btn btn-sm btn-outline-gold ms-3">Ver Todo o Reino</a>
+    </div>
+
+    <!-- Article List -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div th:each="noticia : ${noticias}" class="card card-medieval mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span th:if="${noticia.casaNobre != null}" class="badge bg-gold-dark text-gold font-cinzel border border-gold" th:text="${'🛡️ Casa ' + noticia.casaNobre}">Casa</span>
+                        <span th:if="${noticia.regiao != null}" class="badge bg-dark text-parchment-light font-cinzel" th:text="${'📍 ' + noticia.regiao}">Região</span>
+                    </div>
+                    <h4 class="card-title text-gold" th:text="${noticia.titulo}">Título da Notícia</h4>
+                    <p class="card-text text-parchment-light font-garamond" th:text="${noticia.descricao}">Descrição da Notícia</p>
+                    <a th:href="@{/noticia/{id}(id=${noticia.id})}" class="btn btn-gold font-cinzel btn-sm">Ler Decreto Completo &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div th:replace="~{fragments/layout :: small-council-sidebar}"></div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/script.js}"></script>
+</body>
+</html>

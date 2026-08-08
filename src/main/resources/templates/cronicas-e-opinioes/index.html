@@ -1,81 +1,40 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-bs-theme="dark">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>O Arauto do Rei &middot; Crônicas e Opiniões</title>
-
-  <link rel="stylesheet" th:href="@{/stylesheets/bootstrap.min.css}">
-  <link rel="stylesheet" th:href="@{/stylesheets/style.css}">
-
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${categoriaTitulo != null ? categoriaTitulo : 'Crônicas & Opiniões'} + ' · O Arauto do Rei')}">
 </head>
-
 <body>
+<div th:replace="~{fragments/layout :: raven-banner}"></div>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
 
-<nav class="navbar navbar-expand-lg navbar-light">
-  <a class="navbar-brand" th:href="@{/}">O Arauto</a>
+<div class="container my-5">
+    <div class="header-medieval text-center mb-5">
+        <h1 class="font-cinzel text-gold display-4" th:text="${categoriaTitulo != null ? categoriaTitulo : 'Crônicas & Opiniões'}">Crônicas & Opiniões</h1>
+        <p class="font-garamond text-parchment-light fs-5" th:text="${categoriaSubtitulo != null ? categoriaSubtitulo : 'Ensaios dos Arquimestres da Cidadela e Teologia dos Sete'}">Ensaios dos Arquimestres da Cidadela e Teologia dos Sete</p>
+        <hr class="border-gold w-25 mx-auto">
+    </div>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/noticias-do-reino}">Notícias do Reino</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/economia-e-comercio}">Economia e Comércio</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/vida-na-corte}">Vida na Corte</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/cronicas-e-opinioes}">Crônicas e Opiniões</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/arte-e-cultura}">Arte e Cultura</a>
-      </li>
-    </ul>
-  </div>
-</nav> <!-- Navigation bar -->
-
-  <footer class="text-center text-lg-start footer-style">
-    <div class="container p-4">
-      <div class="row">
-        <div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align: left;">
-          <h5 class="text-uppercase">Sobre nós</h5>
-          <p style="margin-bottom: 2px;"><strong>Endereço:</strong> Rua da Fé, 23, Porto Real</p>
-          <p style="margin-bottom: 2px;"><strong>Telefone:</strong> (123) 456-7890</p>
-          <p style="margin-bottom: 0;"><strong>E-mail:</strong> contato@oarautodorei.westeros</p>
-          <p style="margin-bottom: 2px;"><strong>Corvo Mensageiro:</strong> Envie suas mensagens para nosso mestre de corvos na Torre do Sino.</p>
+    <div class="row">
+        <div class="col-lg-8">
+            <div th:each="noticia : ${noticias}" class="card card-medieval mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span th:if="${noticia.casaNobre != null}" class="badge bg-gold-dark text-gold font-cinzel border border-gold" th:text="${'🛡️ Casa ' + noticia.casaNobre}">Casa</span>
+                        <span th:if="${noticia.regiao != null}" class="badge bg-dark text-parchment-light font-cinzel" th:text="${'📍 ' + noticia.regiao}">Região</span>
+                    </div>
+                    <h4 class="card-title text-gold" th:text="${noticia.titulo}">Título da Notícia</h4>
+                    <p class="card-text text-parchment-light font-garamond" th:text="${noticia.descricao}">Descrição da Notícia</p>
+                    <a th:href="@{/noticia/{id}(id=${noticia.id})}" class="btn btn-gold font-cinzel btn-sm">Ler Decreto Completo &raquo;</a>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="text-align: left;">
-          <h5 class="text-uppercase">Links</h5>
-          <ul class="list-unstyled mb-0">
-            <li><a th:href="@{/}">Facebook</a></li>
-            <li><a th:href="@{/}">Twitter</a></li>
-            <li><a th:href="@{/}">Instagram</a></li>
-          </ul>
+        <div class="col-lg-4">
+            <div th:replace="~{fragments/layout :: small-council-sidebar}"></div>
         </div>
-      </div>
-    </div> <!-- contact information -->
-  </footer>
-  <div class="text-center p-3">
-    &copy; 300 AL O Arauto do Rei
-  </div> <!-- copyright information-->
+    </div>
+</div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/script.js}"></script>
 </body>
-
 </html>

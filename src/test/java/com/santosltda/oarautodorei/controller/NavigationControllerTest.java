@@ -1,17 +1,48 @@
 package com.santosltda.oarautodorei.controller;
 
+import com.santosltda.oarautodorei.config.SecurityConfig;
+import com.santosltda.oarautodorei.domain.BannerHome;
+import com.santosltda.oarautodorei.service.BannerHomeService;
+import com.santosltda.oarautodorei.service.CustomUserDetailsService;
+import com.santosltda.oarautodorei.service.NoticiaHomeService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Collections;
+
 @WebMvcTest(NavigationController.class)
+@Import(SecurityConfig.class)
 public class NavigationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private BannerHomeService bannerHomeService;
+
+    @MockBean
+    private NoticiaHomeService noticiaHomeService;
+
+    @MockBean
+    private CustomUserDetailsService customUserDetailsService;
+
+    @BeforeEach
+    void setUp() {
+        BannerHome banner = new BannerHome();
+        banner.setTitulo("O ARAUTO DO REI");
+        banner.setSubtitulo("Subtítulo");
+        banner.setImagemURL("/images/logo.jpg");
+        Mockito.when(bannerHomeService.getBannerHome()).thenReturn(banner);
+        Mockito.when(noticiaHomeService.getAllNoticias()).thenReturn(Collections.emptyList());
+    }
 
     @Test
     void testIndex() throws Exception {
@@ -55,4 +86,3 @@ public class NavigationControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("arte-e-cultura/index"));
     }
 }
-

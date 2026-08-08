@@ -1,55 +1,55 @@
 <!DOCTYPE html>
-<html data-bs-theme="dark" lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listar Notícias</title>
-    <link rel="stylesheet" th:href="@{/stylesheets/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/stylesheets/style.css}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Torre dos Escribas · O Arauto do Rei')}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" th:href="@{/}">O Arauto</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</nav>
+<div th:replace="~{fragments/layout :: raven-banner}"></div>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
 
-<div class="container mt-5">
-    <h2>Listar Notícias</h2>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Descrição</th>
-            <th>Ações</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="noticia : ${noticias}">
-            <td th:text="${noticia.id}">1</td>
-            <td th:text="${noticia.titulo}">Título da Notícia</td>
-            <td th:text="${noticia.descricao}">Descrição da Notícia</td>
-            <td>
-                <div class="btn-group" role="group">
-                    <a th:href="@{/noticias/editar/{id}(id=${noticia.id})}" class="btn btn-warning">Editar</a>
-                    <a th:href="@{/noticias/excluir/{id}(id=${noticia.id})}" class="btn btn-danger ml-2">Excluir</a>
-                </div>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div class="text-center mt-4">
-        <a th:href="@{/noticias/cadastrar}" class="btn btn-primary">Cadastro</a>
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom border-gold">
+        <div>
+            <h1 class="font-cinzel text-gold m-0">📜 Torre dos Escribas (Curadoria de Édictos)</h1>
+            <p class="font-garamond text-parchment-light m-0">Gerencie, redija e edite as publicações oficiais do Trono de Ferro</p>
+        </div>
+        <a th:href="@{/noticias/cadastrar}" class="btn btn-gold font-cinzel">+ Redigir Novo Decreto</a>
     </div>
 
+    <div class="card card-medieval p-3">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover align-middle m-0 border-gold">
+                <thead class="font-cinzel text-gold bg-gold-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Casa Nobre</th>
+                    <th>Região</th>
+                    <th>Autor</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody class="font-garamond">
+                <tr th:each="noticia : ${noticias}">
+                    <td th:text="${noticia.id}">1</td>
+                    <td class="text-gold fw-bold" th:text="${noticia.titulo}">Título</td>
+                    <td th:text="${noticia.casaNobre != null ? noticia.casaNobre : '-'}">Casa</td>
+                    <td th:text="${noticia.regiao != null ? noticia.regiao : '-'}">Região</td>
+                    <td th:text="${noticia.autor != null ? noticia.autor : 'Escriba'}">Autor</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a th:href="@{/noticias/editar/{id}(id=${noticia.id})}" class="btn btn-sm btn-outline-gold">Editar</a>
+                            <a th:href="@{/noticias/excluir/{id}(id=${noticia.id})}" onclick="return confirm('Revogar este decreto permanentemente dos registros?');" class="btn btn-sm btn-danger ms-1">Excluir</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
-<script src="/scripts/jquery-3.5.1.slim.min.js"></script>
-<script src="/scripts/popper.min.js"></script>
-<script src="/scripts/bootstrap.bundle.min.js"></script>
-<script src="/scripts/script.js"></script>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/script.js}"></script>
 </body>
 </html>

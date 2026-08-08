@@ -1,48 +1,263 @@
-.text-justify {
-          text-align: justify;
-        }
-
-.background-image {
-        border-block: solid;
-        border-block-color: #ebac2f;
-        writing-mode: horizontal-tb;
-        background-color: #0e0f13;
-        background-size: contain; 
-        background-position: right; 
-        background-repeat: no-repeat; 
-        height: 50%; 
-        width: 100%; 
-        }
-      
-.footer-style {
-        border-block: solid; 
-        border-block-color: #ebac2f;
-        background-color: #343434;
-        writing-mode: horizontal-tb;
-      }
-
-.custom-text {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      max-height: 5em; /* Ajuste conforme necessário */
-      cursor: pointer;
-    }
-
-.custom-text.show {
-      white-space: normal;
-      max-height: none;
-    }
+/* Illuminated Parchment & Royal Wax Seal Design System - O Arauto do Rei */
 
 @font-face {
     font-family: 'got-font';
     src: url('../fonts/got-font.ttf') format('truetype');
 }
 
+:root {
+    --color-obsidian-bg: #12100e;
+    --color-parchment-dark: #1e1b18;
+    --color-parchment-medium: #2a2520;
+    --color-parchment-light: #f4e8d1;
+    --color-gold-tarnished: #c5a059;
+    --color-gold-bright: #e5be65;
+    --color-crimson-royal: #8b0000;
+    --color-blood-dark: #4a0000;
+    --color-raven-black: #080706;
+
+    --font-heading: 'got-font', 'Cinzel Decorative', 'Georgia', serif;
+    --font-subheading: 'Cinzel', 'Trajan Pro', serif;
+    --font-body: 'EB Garamond', 'Cormorant Garamond', 'Georgia', serif;
+}
+
+body {
+    background-color: var(--color-obsidian-bg);
+    color: var(--color-parchment-light);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    background-image: radial-gradient(circle at 50% 0%, #2b231b 0%, #12100e 80%);
+    min-height: 100vh;
+}
+
+/* Typography Classes */
+.font-got {
+    font-family: var(--font-heading);
+}
+
+.font-cinzel {
+    font-family: var(--font-subheading);
+}
+
+.font-garamond {
+    font-family: var(--font-body);
+}
+
+.text-gold {
+    color: var(--color-gold-tarnished) !important;
+}
+
+.text-parchment-light {
+    color: var(--color-parchment-light) !important;
+}
+
+.bg-gold-tarnished {
+    background-color: var(--color-gold-tarnished) !important;
+}
+
+.bg-gold-dark {
+    background-color: #2b2112 !important;
+}
+
+.border-gold {
+    border-color: var(--color-gold-tarnished) !important;
+}
+
 .title {
     text-align: center;
-    font-family: 'got-font', sans-serif;
-    color: white;
-    font-size:3em;
-    font-weight: 100;
+    font-family: var(--font-heading);
+    color: var(--color-gold-tarnished);
+    font-size: 3.2rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* Drop Cap Drop-down for Lead Paragraphs */
+.drop-cap::first-letter {
+    font-family: 'Cinzel Decorative', serif;
+    float: left;
+    font-size: 3.8rem;
+    line-height: 0.8;
+    padding-top: 4px;
+    padding-right: 10px;
+    padding-bottom: 2px;
+    color: var(--color-gold-bright);
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.8);
+}
+
+/* Raven Dispatch Top Bar */
+.raven-banner {
+    background: linear-gradient(90deg, var(--color-blood-dark) 0%, var(--color-crimson-royal) 50%, var(--color-blood-dark) 100%);
+    color: var(--color-parchment-light);
+    border-bottom: 2px solid var(--color-gold-tarnished);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Navigation Bar */
+.navbar-medieval {
+    background-color: rgba(18, 16, 14, 0.95) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+}
+
+.navbar-medieval .nav-link {
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.navbar-medieval .nav-link:hover {
+    color: var(--color-gold-bright) !important;
+    text-shadow: 0 0 8px rgba(229, 190, 101, 0.4);
+}
+
+/* Jumbotron Banner */
+.background-image {
+    border-block: 2px solid var(--color-gold-tarnished);
+    background-color: var(--color-raven-black);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 4rem 1rem;
+    position: relative;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+}
+
+.background-image::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(18, 16, 14, 0.65);
+    z-index: 1;
+}
+
+.background-image > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Medieval Cards */
+.card-medieval {
+    background: var(--color-parchment-dark);
+    border: 1px solid var(--color-gold-tarnished);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    transition: transform 0.25 ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.card-medieval:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(197, 160, 89, 0.25);
+    border-color: var(--color-gold-bright);
+}
+
+.card-medieval .card-title {
+    font-family: var(--font-subheading);
+    color: var(--color-gold-tarnished);
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+}
+
+.card-medieval .card-img-top {
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--color-gold-tarnished);
+}
+
+/* Buttons */
+.btn-gold {
+    background-color: var(--color-gold-tarnished);
+    color: #12100e;
+    border: 1px solid var(--color-gold-bright);
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-gold:hover {
+    background-color: var(--color-gold-bright);
+    color: #000;
+}
+
+.btn-outline-gold {
+    border: 1px solid var(--color-gold-tarnished);
+    color: var(--color-gold-tarnished);
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-gold:hover {
+    background: var(--color-gold-tarnished);
+    color: #12100e;
+}
+
+/* Inputs */
+.input-medieval {
+    background-color: var(--color-parchment-medium);
+    border: 1px solid var(--color-gold-tarnished);
+    color: var(--color-parchment-light);
+}
+
+.input-medieval:focus {
+    background-color: #352e27;
+    border-color: var(--color-gold-bright);
+    color: #fff;
+    box-shadow: 0 0 8px rgba(229, 190, 101, 0.4);
+}
+
+/* Link Gold */
+.link-gold {
+    color: var(--color-gold-tarnished);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link-gold:hover {
+    color: var(--color-gold-bright);
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer-medieval {
+    background-color: #0b0a09;
+    border-top: 2px solid var(--color-gold-tarnished);
+}
+
+/* Truncate script override */
+.custom-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.custom-text.show {
+    display: block;
+}
+
+/* Medieval Map Nodes */
+.map-node {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.map-node:hover {
+    transform: scale(1.05);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-obsidian-bg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-gold-tarnished);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold-bright);
 }

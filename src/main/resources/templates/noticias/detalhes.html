@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${noticia.titulo} + ' · O Arauto do Rei')}">
+</head>
+<body>
+
+<div th:replace="~{fragments/layout :: raven-banner}"></div>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Article Main Content Column -->
+        <div class="col-lg-8">
+            <article class="card card-medieval p-4 mb-4">
+                <!-- Metadata Badges -->
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                    <span th:if="${noticia.casaNobre != null}" class="badge bg-gold-dark text-gold font-cinzel border border-gold" th:text="${'🛡️ Casa ' + noticia.casaNobre}">Casa</span>
+                    <span th:if="${noticia.regiao != null}" class="badge bg-dark text-parchment-light font-cinzel" th:text="${'📍 Região: ' + noticia.regiao}">Região</span>
+                    <span class="badge bg-secondary font-cinzel">📜 Édito Selado</span>
+                </div>
+
+                <h1 class="font-cinzel text-gold display-5 mb-3" th:text="${noticia.titulo}">Título Completo da Notícia</h1>
+
+                <div class="d-flex align-items-center text-muted font-cinzel small mb-4 pb-3 border-bottom border-gold">
+                    <span me-3>✍️ Redigido por: <strong class="text-gold" th:text="${noticia.autor != null ? noticia.autor : 'Escriba Real'}">Autor</strong></span>
+                    <span class="ms-auto">🗓️ Transcrito em: <span th:text="${#temporals.format(noticia.dataPublicacao, 'dd/MM/yyyy')}">Data</span></span>
+                </div>
+
+                <!-- Main Featured Banner Image -->
+                <img th:src="@{${noticia.imagemURL}}" class="img-fluid rounded mb-4 border border-gold shadow" th:alt="${noticia.titulo}">
+
+                <!-- Lead Paragraph with Illuminated Drop Cap -->
+                <p class="font-garamond lead drop-cap text-parchment-light mb-4" th:text="${noticia.descricao}">
+                    Lead paragraph text of the news article...
+                </p>
+
+                <!-- Full Article Content Body -->
+                <div class="font-garamond text-parchment-light fs-5" style="white-space: pre-line;" th:text="${noticia.conteudoCompleto != null ? noticia.conteudoCompleto : noticia.descricao}">
+                    Corpo completo do decreto transcrito pelos escribas...
+                </div>
+
+                <!-- End Seal -->
+                <div class="text-center my-4 pt-3 border-top border-gold">
+                    <span class="text-gold font-cinzel">❖ DADO SOB O SELO REAL EM PORTO REAL ❖</span>
+                </div>
+
+                <div class="mt-3">
+                    <a th:href="@{/}" class="btn btn-outline-gold font-cinzel">&laquo; Retornar aos Arquivos Principais</a>
+                </div>
+            </article>
+        </div>
+
+        <!-- Sidebar Column -->
+        <div class="col-lg-4">
+            <div th:replace="~{fragments/layout :: small-council-sidebar}"></div>
+
+            <!-- Related Articles Box -->
+            <div class="card card-medieval">
+                <div class="card-header bg-gold-dark text-gold font-cinzel border-bottom border-gold">
+                    📜 Outros Édictos Recentes
+                </div>
+                <div class="list-group list-group-flush bg-transparent">
+                    <a th:each="rel : ${noticiasRelacionadas}" th:href="@{/noticia/{id}(id=${rel.id})}" class="list-group-item bg-transparent text-parchment-light font-cinzel small border-bottom border-secondary">
+                        <strong class="text-gold d-block" th:text="${rel.titulo}">Título</strong>
+                        <span class="text-muted" th:text="${rel.casaNobre != null ? 'Casa ' + rel.casaNobre : 'Porto Real'}">Casa</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/script.js}"></script>
+</body>
+</html>

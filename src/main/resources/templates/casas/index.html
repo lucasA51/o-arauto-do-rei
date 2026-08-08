@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Casas Nobres de Westeros · O Arauto do Rei')}">
+</head>
+<body>
+<div th:replace="~{fragments/layout :: raven-banner}"></div>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <h1 class="font-cinzel text-gold display-4">🛡️ Arquivo Hermético das Casas Nobres</h1>
+        <p class="font-garamond text-parchment-light fs-5">Filtre decretos, relatos de guerras e alianças pelos blasones dos lordes de Westeros</p>
+        <hr class="border-gold w-25 mx-auto">
+    </div>
+
+    <!-- House Badges Filter Grid -->
+    <div class="row g-3 mb-5 text-center">
+        <div class="col-6 col-md-3">
+            <a th:href="@{/casas?nome=Stark}" class="btn btn-outline-gold w-100 p-3 font-cinzel d-flex flex-column align-items-center">
+                <span class="fs-1">🐺</span>
+                <strong>Casa Stark</strong>
+                <small class="text-muted">Inverno Chegando</small>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/casas?nome=Lannister}" class="btn btn-outline-gold w-100 p-3 font-cinzel d-flex flex-column align-items-center">
+                <span class="fs-1">🦁</span>
+                <strong>Casa Lannister</strong>
+                <small class="text-muted">Ouça-me Rugir</small>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/casas?nome=Targaryen}" class="btn btn-outline-gold w-100 p-3 font-cinzel d-flex flex-column align-items-center">
+                <span class="fs-1">🐉</span>
+                <strong>Casa Targaryen</strong>
+                <small class="text-muted">Fogo e Sangue</small>
+            </a>
+        </div>
+        <div class="col-6 col-md-3">
+            <a th:href="@{/casas?nome=Baratheon}" class="btn btn-outline-gold w-100 p-3 font-cinzel d-flex flex-column align-items-center">
+                <span class="fs-1">🦌</span>
+                <strong>Casa Baratheon</strong>
+                <small class="text-muted">Nossa é a Fúria</small>
+            </a>
+        </div>
+    </div>
+
+    <!-- Filter Status -->
+    <div th:if="${casaSelecionada != null}" class="alert alert-dark border-gold text-gold font-cinzel mb-4">
+        🛡️ Exibindo crônicas associadas à <strong>Casa <span th:text="${casaSelecionada}">Casa</span></strong>
+        <a th:href="@{/casas}" class="btn btn-sm btn-outline-gold ms-3">Exibir Todas as Casas</a>
+    </div>
+
+    <!-- Articles List -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div th:each="noticia : ${noticias}" class="card card-medieval mb-4">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span th:if="${noticia.casaNobre != null}" class="badge bg-gold-dark text-gold font-cinzel border border-gold" th:text="${'🛡️ Casa ' + noticia.casaNobre}">Casa</span>
+                        <span th:if="${noticia.regiao != null}" class="badge bg-dark text-parchment-light font-cinzel" th:text="${'📍 ' + noticia.regiao}">Região</span>
+                    </div>
+                    <h4 class="card-title text-gold" th:text="${noticia.titulo}">Título da Notícia</h4>
+                    <p class="card-text text-parchment-light font-garamond" th:text="${noticia.descricao}">Descrição da Notícia</p>
+                    <a th:href="@{/noticia/{id}(id=${noticia.id})}" class="btn btn-gold font-cinzel btn-sm">Ler Decreto Completo &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div th:replace="~{fragments/layout :: small-council-sidebar}"></div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/script.js}"></script>
+</body>
+</html>

@@ -28,4 +28,24 @@ public class NoticiaHomeService {
     public void updateNoticia(NoticiaHome noticia) {
         noticiaHomeRepository.save(noticia);
     }
+
+    public void deleteNoticia(Long id) {
+        noticiaHomeRepository.deleteById(id);
+    }
+
+    public List<NoticiaHome> getNoticiasPorCasa(String casa) {
+        return noticiaHomeRepository.findByCasaNobreIgnoreCase(casa);
+    }
+
+    public List<NoticiaHome> getNoticiasPorRegiao(String regiao) {
+        return noticiaHomeRepository.findByRegiaoIgnoreCase(regiao);
+    }
+
+    public List<NoticiaHome> getNoticiasEmDestaque() {
+        return noticiaHomeRepository.findByDestaqueTrue();
+    }
+
+    public List<NoticiaHome> buscarNoticias(String query) {
+        return noticiaHomeRepository.findByTituloContainingIgnoreCaseOrDescricaoContainingIgnoreCase(query, query);
+    }
 }

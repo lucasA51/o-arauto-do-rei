@@ -24,10 +24,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/", "/usuarios/registrar", "/usuarios/login", "/stylesheets/**", "/scripts/**", "/images/**", "/fonts/**", "/static/**").permitAll()
-                                .requestMatchers("/noticias/**").authenticated()
+                                .requestMatchers("/", "/noticia/**", "/noticias-do-reino", "/economia-e-comercio", "/vida-na-corte", "/cronicas-e-opinioes", "/arte-e-cultura", "/casas/**", "/arquivos/**", "/usuarios/registrar", "/usuarios/login", "/stylesheets/**", "/scripts/**", "/images/**", "/fonts/**", "/h2-console/**").permitAll()
+                                .requestMatchers("/noticias/cadastrar", "/noticias/editar/**", "/noticias/excluir/**", "/noticias/listar").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .formLogin(formLogin ->

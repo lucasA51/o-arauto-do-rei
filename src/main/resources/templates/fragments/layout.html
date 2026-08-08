@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">O Arauto do Rei</title>
+    <!-- Google Fonts for Medieval Aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/stylesheets/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/stylesheets/style.css}">
+</head>
+<body>
+
+<!-- Raven Dispatch Top Banner -->
+<div th:fragment="raven-banner" class="raven-banner d-flex align-items-center justify-content-between px-3 py-2">
+    <div class="d-flex align-items-center gap-2">
+        <span class="badge bg-gold-tarnished text-dark text-uppercase font-cinzel fw-bold me-2">📜 Despacho de Corvo</span>
+        <span class="text-parchment-light font-cinzel text-truncate">URGENTE: Frota de Ferro avança pelo Mar Poente — Declaração do Pequeno Conselho</span>
+    </div>
+    <div class="d-none d-md-block text-end">
+        <a th:href="@{/arquivos/mapa}" class="btn btn-sm btn-outline-gold font-cinzel py-0 px-2">Ver no Mapa Real &raquo;</a>
+    </div>
+</div>
+
+<!-- Main Medieval Navigation Bar -->
+<nav th:fragment="navbar" class="navbar navbar-expand-lg sticky-top navbar-medieval border-bottom border-gold">
+    <div class="container-fluid px-lg-5">
+        <a class="navbar-brand d-flex align-items-center text-gold font-got fs-3" th:href="@{/}">
+            <span class="wax-seal-icon me-2">👑</span> O Arauto
+        </a>
+        <button class="navbar-toggler border-gold" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Alternar navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 font-cinzel">
+                <li class="nav-item">
+                    <a class="nav-link text-parchment-light" th:href="@{/noticias-do-reino}">Notícias do Reino</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-parchment-light" th:href="@{/economia-e-comercio}">Economia & Comércio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-parchment-light" th:href="@{/vida-na-corte}">Vida na Corte</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-parchment-light" th:href="@{/cronicas-e-opinioes}">Crônicas & Opiniões</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-parchment-light" th:href="@{/arte-e-cultura}">Arte & Cultura</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-gold" th:href="@{/casas}">Casas Nobres</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-gold" th:href="@{/arquivos/mapa}">Mapa & Arquivos</a>
+                </li>
+            </ul>
+
+            <!-- Search Form & Session Controls -->
+            <form class="d-flex me-3" th:action="@{/}" method="get">
+                <input class="form-control form-control-sm input-medieval me-2" type="search" name="busca" placeholder="Buscar decreto..." aria-label="Buscar">
+                <button class="btn btn-sm btn-gold font-cinzel" type="submit">Buscar</button>
+            </form>
+
+            <ul class="navbar-nav font-cinzel">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a class="nav-link text-warning" th:href="@{/noticias/listar}">Escriba (Gerenciar)</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/logout}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-link nav-link text-danger p-0 border-0 ms-2">Sair</button>
+                    </form>
+                </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <a class="nav-link text-gold" th:href="@{/usuarios/login}">Entrar</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Small Council Sidebar Widget -->
+<div th:fragment="small-council-sidebar">
+    <div class="card card-medieval mb-4">
+        <div class="card-header bg-gold-dark text-gold font-cinzel border-bottom border-gold">
+            👑 Diário do Pequeno Conselho
+        </div>
+        <div class="card-body">
+            <h6 class="font-cinzel text-gold mb-2">Cotação do Banco de Ferro</h6>
+            <p class="small text-parchment-light mb-3">
+                1 Dragão de Ouro = 210 Veados de Prata<br>
+                Trigo de Jardim de Cima: +12% por tonelada
+            </p>
+            <hr class="border-gold">
+            <h6 class="font-cinzel text-gold mb-2">Mestre dos Sussurros</h6>
+            <p class="small text-parchment-light mb-0">
+                <em>"Sussurros nas tavernas da Baixada das Pulgas falam de navios trazidos do leste..."</em>
+            </p>
+        </div>
+    </div>
+
+    <div class="card card-medieval mb-4">
+        <div class="card-header bg-gold-dark text-gold font-cinzel border-bottom border-gold">
+            🛡️ Grandes Casas de Westeros
+        </div>
+        <div class="list-group list-group-flush bg-transparent">
+            <a th:href="@{/casas?nome=Stark}" class="list-group-item bg-transparent text-parchment-light d-flex justify-content-between align-items-center">
+                <span>🐺 Casa Stark</span>
+                <span class="badge bg-secondary">Inverno Chegando</span>
+            </a>
+            <a th:href="@{/casas?nome=Lannister}" class="list-group-item bg-transparent text-parchment-light d-flex justify-content-between align-items-center">
+                <span>🦁 Casa Lannister</span>
+                <span class="badge bg-danger">Ouça-me Rugir</span>
+            </a>
+            <a th:href="@{/casas?nome=Targaryen}" class="list-group-item bg-transparent text-parchment-light d-flex justify-content-between align-items-center">
+                <span>🐉 Casa Targaryen</span>
+                <span class="badge bg-dark">Fogo e Sangue</span>
+            </a>
+            <a th:href="@{/casas?nome=Baratheon}" class="list-group-item bg-transparent text-parchment-light d-flex justify-content-between align-items-center">
+                <span>🦌 Casa Baratheon</span>
+                <span class="badge bg-warning text-dark">Nossa é a Fúria</span>
+            </a>
+            <a th:href="@{/casas?nome=Greyjoy}" class="list-group-item bg-transparent text-parchment-light d-flex justify-content-between align-items-center">
+                <span>🦑 Casa Greyjoy</span>
+                <span class="badge bg-info text-dark">Nós Não Semeamos</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Medieval In-Universe Footer -->
+<footer th:fragment="footer" class="footer-medieval text-center text-lg-start border-top border-gold mt-5 py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-start">
+                <h5 class="font-cinzel text-gold">Chancelaria Real de Jornalismo</h5>
+                <p class="mb-1 text-parchment-light"><strong>Endereço:</strong> Rua da Fé, nº 23 (Próximo ao Grande Septo de Baelor), Porto Real</p>
+                <p class="mb-1 text-parchment-light"><strong>Corvo Mensageiro:</strong> Envie suas missivas para a Torre do Sino aos cuidados do Escriba-Chefe</p>
+                <p class="mb-0 text-parchment-light"><strong>Selo de Aprovação:</strong> Chancelaria do Pequeno Conselho sob o Reino do Trono de Ferro</p>
+            </div>
+            <div class="col-lg-6 col-md-12 mb-4 mb-md-0 text-start">
+                <h5 class="font-cinzel text-gold">Rede de Corvos & Arquivos Reais</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-1">📜 <a th:href="@{/noticias-do-reino}" class="link-gold">Éditos Reais & Notícias do Reino</a></li>
+                    <li class="mb-1">🗺️ <a th:href="@{/arquivos/mapa}" class="link-gold">Mapa Interativo & Registros por Região</a></li>
+                    <li class="mb-1">🛡️ <a th:href="@{/casas}" class="link-gold">Arquivos Herméticos das Casas Nobres</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="border-gold my-3">
+        <div class="text-center text-muted small font-cinzel">
+            &copy; 300 AC &middot; O Arauto do Rei &middot; Imprimatur sob autoridade régia do Trono de Ferro
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

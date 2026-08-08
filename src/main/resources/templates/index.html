@@ -1,116 +1,92 @@
 <!DOCTYPE html>
-<html lang="pt-br" data-bs-theme="dark" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O Arauto do Rei</title>
-    <link rel="stylesheet" th:href="@{/stylesheets/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/stylesheets/style.css}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head th:replace="~{fragments/layout :: head('O Arauto do Rei · Gazeta Real de Westeros')}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" th:href="@{/}">O Arauto</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/noticias/listar}">Listar Notícias</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav">
-            <li class="nav-item" sec:authorize="isAuthenticated()">
-                <form th:action="@{/logout}" method="post" class="form-inline">
-                    <button type="submit" class="btn btn-link nav-link">Logout</button>
-                </form>
-            </li>
-            <li class="nav-item" sec:authorize="!isAuthenticated()">
-                <a class="nav-link" th:href="@{/usuarios/login}">Login</a>
-            </li>
-        </ul>
-    </div>
-</nav>
 
-<div class="jumbotron text-center background-image" th:style="'background-image: url(' + ${bannerHome.imagemURL} + ')'">
-    <h1 class="title mt-4" th:text="${bannerHome.titulo}">O Arauto do Rei</h1>
-    <p th:text="${bannerHome.subtitulo}">A Voz Inquestionável dos Sete Reinos</p>
+<!-- Raven Dispatch Bar -->
+<div th:replace="~{fragments/layout :: raven-banner}"></div>
+
+<!-- Navigation Bar -->
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<!-- Hero Gazette Jumbotron Banner -->
+<div class="jumbotron text-center background-image mb-5" th:style="'background-image: url(' + (${bannerHome != null} ? ${bannerHome.imagemURL} : '/images/logo.jpg') + ')'">
+    <div class="container py-4">
+        <h1 class="title mt-2 display-3" th:text="${bannerHome != null ? bannerHome.titulo : 'O ARAUTO DO REI'}">O ARAUTO DO REI</h1>
+        <p class="font-cinzel text-gold fs-5 mb-0" th:text="${bannerHome != null ? bannerHome.subtitulo : 'A Voz Inquestionável dos Sete Reinos · Ano 300 AC'}">A Voz Inquestionável dos Sete Reinos</p>
+    </div>
 </div>
 
-<div class="container mt-5">
+<div class="container my-5">
+
+    <!-- Search feedback if searching -->
+    <div th:if="${termoBusca != null}" class="alert alert-dark border-gold text-gold font-cinzel mb-4">
+        📜 Resultados da busca por decretos contendo: <strong th:text="${termoBusca}">termo</strong>
+        <a th:href="@{/}" class="btn btn-sm btn-outline-gold ms-3">Limpar Busca</a>
+    </div>
+
     <div class="row">
-        <div class="col-md-8">
-            <h2>Ultimas Notícias</h2>
-            <div th:each="noticia : ${noticias}" class="card mb-3">
-                <img class="card-img-top" th:src="@{${noticia.imagemURL}}" alt="notícia">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${noticia.titulo}">Título da Notícia</h5>
-                    <p class="card-text custom-text text-justify" th:text="${noticia.descricao}">Descrição da Notícia</p>
-                    <a href="#" class="btn btn-primary">Leia Mais</a>
-                </div>
+        <!-- Main Content Area -->
+        <div class="col-lg-8">
+            <h2 class="font-cinzel text-gold border-bottom border-gold pb-2 mb-4 d-flex align-items-center justify-content-between">
+                <span>📜 Últimos Decretos e Crônicas</span>
+                <span class="fs-6 text-muted font-garamond fw-normal">Porto Real, 300 AC</span>
+            </h2>
+
+            <div th:if="${#lists.isEmpty(noticias)}" class="alert alert-secondary font-cinzel">
+                Nenhum decreto registrado nos arquivos da Cidadela no momento.
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="row text-justify mb-3">
-                <h2>Notícias Populares</h2>
-                <ul class="list-group">
-                    <li class="list-group-item"><a href="#">A Conquista de Yunkai: Daenerys Targaryen Libertadora</a></li>
-                    <li class="list-group-item"><a href="#">Massacre no Casamento Vermelho: O Trágico Fim dos Stark</a></li>
-                    <li class="list-group-item"><a href="#">A Morte de Lorde Tywin Lannister: Um Golpe na Fortaleza de Casterly Rock</a></li>
-                </ul>
-            </div>
-            <div class="row text-justify mb-3">
-                <div class="card">
-                    <div class="card-body text-justify">
-                        <h5 class="card-title">Bem-vindo ao O Arauto do Rei</h5>
-                        <p class="card-text">O jornal mais confiável e respeitado dos Sete Reinos, sediado no coração de Porto Real...</p>
-                        <h6 class="card-subtitle mb-2 text-muted">Nossa Missão</h6>
-                        <p class="card-text">Nossa missão é informar, educar e conectar os habitantes dos Sete Reinos...</p>
-                        <h6 class="card-subtitle mb-2 text-muted">Assine O Arauto do Rei</h6>
-                        <p class="card-text">Receba nossas edições diretamente em sua residência...</p>
-                        <h6 class="card-subtitle mb-2 text-muted">Junte-se à Nossa Equipe</h6>
-                        <p class="card-text">Estamos sempre em busca de talentos apaixonados por jornalismo...</p>
-                        <h6 class="card-subtitle mb-2 text-muted">Conecte-se Conosco</h6>
-                        <p class="card-text">Siga-nos em nossas plataformas sociais para atualizações em tempo real:<br>
-                            Facebook: OArautodoRei<br> Twitter: @ArautodoReiWOS<br> Instagram: @arautodorei
-                        </p>
-                        <p class="card-text">No O Arauto do Rei, acreditamos que a informação é a chave para um reino mais justo e informado...</p>
+
+            <div th:each="noticia : ${noticias}" class="card card-medieval mb-4">
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        <img th:src="@{${noticia.imagemURL}}" class="img-fluid rounded-start h-100 object-fit-cover" th:alt="${noticia.titulo}">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body d-flex flex-column h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span th:if="${noticia.casaNobre != null}" class="badge bg-gold-dark text-gold font-cinzel border border-gold" th:text="${'🛡️ Casa ' + noticia.casaNobre}">Casa Nobre</span>
+                                <span th:if="${noticia.regiao != null}" class="badge bg-dark text-parchment-light font-cinzel" th:text="${'📍 ' + noticia.regiao}">Região</span>
+                            </div>
+                            <h5 class="card-title" th:text="${noticia.titulo}">Título da Notícia</h5>
+                            <p class="card-text custom-text text-parchment-light font-garamond" th:text="${noticia.descricao}">Descrição da Notícia</p>
+                            <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top border-secondary">
+                                <small class="text-muted font-cinzel" th:text="${noticia.autor != null ? noticia.autor : 'Escriba Real'}">Autor</small>
+                                <a th:href="@{/noticia/{id}(id=${noticia.id})}" class="btn btn-sm btn-gold font-cinzel">Ler Decreto Completo &raquo;</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Sidebar Area -->
+        <div class="col-lg-4">
+            <div th:replace="~{fragments/layout :: small-council-sidebar}"></div>
+
+            <!-- Welcome to Gazette Box -->
+            <div class="card card-medieval mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-gold font-cinzel">A Gazeta Oficial da Corte</h5>
+                    <p class="card-text small text-parchment-light">
+                        O Arauto do Rei é a publicação oficial chancelada pela Fortaleza Vermelha e supervisionada pelos Arquimestres da Cidadela de Vila Velha.
+                    </p>
+                    <hr class="border-gold my-2">
+                    <h6 class="font-cinzel text-gold small">Subscrição por Corvo Mensageiro</h6>
+                    <p class="card-text small text-parchment-light">
+                        Receba os éditos do Trono de Ferro semanalmente em seu castelo ou torre de imissão.
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<footer class="text-center text-lg-start footer-style">
-    <div class="container p-4">
-        <div class="row">
-            <div class="col-lg-6 col-md-12 mb-4 mb-md-0" style="text-align: left;">
-                <h5 class="text-uppercase">Sobre nós</h5>
-                <p style="margin-bottom: 2px;"><strong>Endereço:</strong> Rua da Fé, 23, Porto Real</p>
-                <p style="margin-bottom: 2px;"><strong>Telefone:</strong> (123) 456-7890</p>
-                <p style="margin-bottom: 0;"><strong>E-mail:</strong> contato@oarautodorei.westeros</p>
-                <p style="margin-bottom: 2px;"><strong>Corvo Mensageiro:</strong> Envie suas mensagens para nosso mestre de corvos na Torre do Sino.</p>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style="text-align: left;">
-                <h5 class="text-uppercase">Links</h5>
-                <ul class="list-unstyled mb-0">
-                    <li><a th:href="@{/}">Facebook</a></li>
-                    <li><a th:href="@{/}">Twitter</a></li>
-                    <li><a th:href="@{/}">Instagram</a></li>
-                </ul>
-            </div>
-        </div>
-    </div> <!-- contact information -->
-</footer>
-<div class="text-center p-3">
-    &copy; 300 AL O Arauto do Rei
-</div> <!-- copyright information-->
+<!-- Medieval Footer -->
+<footer th:replace="~{fragments/layout :: footer}"></footer>
 
-<script src="/scripts/jquery-3.5.1.slim.min.js"></script>
-<script src="/scripts/popper.min.js"></script>
-<script src="/scripts/bootstrap.bundle.min.js"></script>
-<script src="/scripts/script.js"></script>
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/script.js}"></script>
 </body>
 </html>

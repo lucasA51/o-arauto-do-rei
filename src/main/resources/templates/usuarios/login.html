@@ -1,61 +1,55 @@
 <!DOCTYPE html>
-<html data-bs-theme="dark" lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" th:href="@{/stylesheets/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/stylesheets/style.css}">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Entrar na Torre dos Escribas · O Arauto do Rei')}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" th:href="@{/}">O Arauto</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <!-- Links de navegação aqui, se necessário -->
-        </ul>
+<div th:replace="~{fragments/layout :: raven-banner}"></div>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card card-medieval p-4 shadow-lg">
+                <div class="text-center mb-4">
+                    <span class="fs-1">🗝️</span>
+                    <h2 class="font-cinzel text-gold m-0">Acesso à Torre dos Escribas</h2>
+                    <p class="font-garamond text-parchment-light small">Identifique-se como maestre ou chanceler autorizado</p>
+                </div>
+
+                <form th:action="@{/usuarios/login}" method="post">
+                    <div class="mb-3">
+                        <label for="usuario" class="form-label font-cinzel text-gold">Nome de Escriba (Usuário)</label>
+                        <input type="text" class="form-control input-medieval" id="usuario" name="username" placeholder="Digite seu usuário" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="senha" class="form-label font-cinzel text-gold">Palavra de Passe (Senha)</label>
+                        <input type="password" class="form-control input-medieval" id="senha" name="password" placeholder="Digite sua senha" required>
+                    </div>
+
+                    <div th:if="${param.error}" class="alert alert-danger font-cinzel small my-3">
+                        ❌ Acesso negado. Nome de escriba ou senha incorretos.
+                    </div>
+
+                    <div th:if="${param.logout}" class="alert alert-success font-cinzel small my-3">
+                        ✓ Sessão encerrada com sucesso nos registros da Cidadela.
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-gold font-cinzel py-2">Autenticar e Entrar</button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-4 pt-3 border-top border-gold">
+                    <p class="small text-muted font-cinzel mb-2">Ainda não possui credenciais de escriba?</p>
+                    <a th:href="@{/usuarios/registrar}" class="btn btn-outline-gold btn-sm font-cinzel">Solicitar Registro de Escriba</a>
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
-
-<div class="container mt-5">
-    <h2>Login</h2>
-
-    <form action="/usuarios/login" method="post">
-        <div class="form-group">
-            <label for="usuario">Nome de Usuário</label>
-            <input type="text" class="form-control" id="usuario" name="username" placeholder="Digite seu nome de usuário" required>
-        </div>
-        <div class="form-group mt-3">
-            <label for="senha">Senha</label>
-            <input type="password" class="form-control" id="senha" name="password" placeholder="Digite sua senha" required>
-        </div>
-
-        <!-- Mensagens de erro -->
-        <div th:if="${param.error}" class="alert alert-danger mt-3">
-            <span th:text="'Nome de usuário ou senha incorretos.'">Erro de login</span>
-        </div>
-
-        <!-- Mensagens de sucesso -->
-        <div th:if="${param.success}" class="alert alert-success mt-3">
-            <span th:text="${param.success}">Login bem-sucedido</span>
-        </div>
-
-        <div class="form-group mt-4">
-            <button type="submit" class="btn btn-primary">Login</button>
-        </div>
-    </form>
 </div>
 
-<div class="text-center mt-4">
-    <a th:href="@{/usuarios/registrar}" class="btn btn-primary">Registrar</a>
-</div>
-
-<script src="/scripts/jquery-3.5.1.slim.min.js"></script>
-<script src="/scripts/popper.min.js"></script>
-<script src="/scripts/bootstrap.bundle.min.js"></script>
-<script src="/scripts/script.js"></script>
+<footer th:replace="~{fragments/layout :: footer}"></footer>
+<script th:src="@{/scripts/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/scripts/script.js}"></script>
 </body>
 </html>
